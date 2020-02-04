@@ -1,0 +1,5 @@
+msf + resource-file in [+z] process
+wait 1m
+export from database in json
+send exported
+

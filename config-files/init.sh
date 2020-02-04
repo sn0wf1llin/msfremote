@@ -1,13 +1,31 @@
-#!/bin/bash
+# #! /bin/bash
 
+# set -e
+
+# apt-get install -y sudo
+# useradd noroot && usermod -G sudo noroot
+
+# service postgresql start
+# export PATH="$PATH:/usr/local/rvm/rubies/default/bin"
+# export PATH="$PATH:/usr/lib/postgresql/9.6/bin"
+# mkdir -p /.msf4 && chown -R root:sudo /.msf4 && chmod u+w /.msf4
+# cd /opt/metasploit-framework && bundle install
+
+# # as noroot
+# cd /opt/metasploit-framework
+
+# export PATH="/usr/local/rvm/bin:/usr/local/rvm/rubies/ruby-/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/.rvm/bin:/usr/lib/postgresql/9.6/bin:/usr/local/rvm/src/ruby-2.6.5/bin:/usr/local/rvm/gems/ruby-2.6.5/bin:/usr/local/rvm/src/ruby-2.6.5"
+
+
+# msfdb init
+# # run resource-file test in background
+# config-files/run-test.sh &
+# RUN_TEST_PID=$!
+
+# # wait 3m
+# sleep 5m
+#!/bin/bash
 set -e
 
-if [ -z $TEST_RESOURCE_FILE_LINK ]; then echo "No TEST_RESOURCE_FILE_LINK provided."; exit 1; fi;
+cd /opt/metasploit-framework
 
-source /usr/local/rvm/scripts/rvm
-service postgresql start && echo "PostgreSQL started [OK]" || echo "PostgreSQL started [FAIL]"
-echo "Got <$TEST_RESOURCE_FILE_LINK> ... "
-rm -f /tmp/tests/*
-curl -sSL $TEST_RESOURCE_FILE_LINK --output /tmp/tests/test.rc
-cp /tmp/tests/test.rc /tmp/data/test.rc
-msfconsole -r /tmp/tests/test.rc 2>/tmp/data/test.rc_errors.txt 1>/tmp/data/test.rc_results.txt
